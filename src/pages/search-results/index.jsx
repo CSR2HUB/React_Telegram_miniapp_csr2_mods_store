@@ -120,7 +120,7 @@ const SearchResults = () => {
     }
 
     // Load cart items from localStorage
-    const savedCart = localStorage.getItem('cartItems');
+    const savedCart = localStorage.getItem('csr2_cart');
     if (savedCart) {
       setCartItems(JSON.parse(savedCart));
     }
@@ -186,7 +186,7 @@ const SearchResults = () => {
     }
     
     setCartItems(updatedCart);
-    localStorage.setItem('cartItems', JSON.stringify(updatedCart));
+    localStorage.setItem('csr2_cart', JSON.stringify(updatedCart));
     
     // Show toast notification
     if (window.Telegram?.WebApp) {
