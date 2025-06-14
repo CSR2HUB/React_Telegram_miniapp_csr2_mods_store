@@ -1,10 +1,9 @@
 const express = require('express');
-const dotenv = require('dotenv');
 const cors = require('cors');
+const dotenv = require('dotenv');
 const connectDB = require('./config/db');
-const modRoutes = require('./routes/modRoutes');
 
-// Load env vars
+// Load environment variables
 dotenv.config();
 
 // Connect to database
@@ -13,15 +12,29 @@ connectDB();
 const app = express();
 
 // Middleware
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
 // Routes
 app.get('/', (req, res) => {
   res.send('API is running...');
 });
 
-app.use('/api/mods', modRoutes);
+const authRoutes = require('./routes/authRoutes');
+const modRoutes = require('./routes/modRoutes');
+// ... import more routes here
 
-const PORT = process.env.PORT || 5001;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.use('/api/auth', authRoutes);
+app.use('/api/mods', modRoutes);
+// ... use more routes here
+
+// Error handling middleware
+const { notFound, errorHandler } = require('./middleware/errorMiddleware');
+app.use(notFound);
+app.use(errorHandler);
+
+// Port config
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+});

@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+
 const {
   getAllMods,
   getModById,
@@ -7,8 +8,15 @@ const {
   updateMod,
   deleteMod,
 } = require('../controllers/modController');
+
 const { protect, admin } = require('../middleware/authMiddleware');
 
+// Optional placeholder/debug route
+router.get('/ping', (req, res) => {
+  res.json({ message: 'Mods route active' });
+});
+
+// CRUD routes for mods
 router.route('/')
   .get(getAllMods)
   .post(protect, admin, createMod);
