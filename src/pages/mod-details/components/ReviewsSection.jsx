@@ -177,7 +177,7 @@ The creator clearly knows what they're doing. The dyno charts match real-world p
                 </div>
               </div>
               
-              <div className="ml-13">
+              <div className="ml-12">
                 <p className="text-text-primary font-body leading-relaxed mb-3">
                   {review.comment}
                 </p>
